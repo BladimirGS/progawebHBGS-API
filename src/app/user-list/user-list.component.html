@@ -1,0 +1,43 @@
+<div class="table-container">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">User Table</h1>
+        </div>
+        <div class="card-content">
+            <ng-container *ngIf="loading; else loadedContent">
+                <div class="skeleton-container">
+                    <div *ngFor="let item of [1,2,3,4,5]" class="skeleton"></div>
+                </div>
+            </ng-container>
+            <ng-template #loadedContent>
+                <div class="table-responsive">
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of displayedUsers; trackBy: trackByUserId">
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.role }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <span>Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ users.length }} entries</span>
+                    <div class="pagination-buttons">
+                        <button (click)="previousPage()" [disabled]="currentPage === 1" class="btn">Previous</button>
+                        <button (click)="nextPage()" [disabled]="endIndex >= users.length" class="btn">Next</button>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,166 @@
+<div class="table-container">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">List of Pokemon</h1>
+            <div class="controls">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search by name or ID..." [(ngModel)]="searchTerm"
+                        (input)="onSearch()" />
+                </div>
+                <div class="page-size-selector">
+                    <label for="pageSize">Records per page:</label>
+                    <select id="pageSize" [(ngModel)]="pageSize" (change)="updateLocalPokemonList()">
+                        <option [ngValue]="5">5</option>
+                        <option [ngValue]="10">10</option>
+                        <option [ngValue]="20">20</option>
+                        <option [ngValue]="50">50</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-content">
+            <ng-container *ngIf="loading; else loadedContent">
+                <div class="skeleton-container">
+                    <div *ngFor="let item of [1,2,3,4,5]" class="skeleton"></div>
+                </div>
+            </ng-container>
+            <ng-template #loadedContent>
+                <div class="table-responsive">
+                    <table class="pokemon-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <button (click)="changeSortField('id')"
+                                        [class.sorted-asc]="sortBy === 'id' && sortDirection === 'asc'"
+                                        [class.sorted-desc]="sortBy === 'id' && sortDirection === 'desc'">
+                                        #
+                                    </button>
+                                </th>
+                                <th>
+                                    <button (click)="changeSortField('name')"
+                                        [class.sorted-asc]="sortBy === 'name' && sortDirection === 'asc'"
+                                        [class.sorted-desc]="sortBy === 'name' && sortDirection === 'desc'">
+                                        Name
+                                    </button>
+                                </th>
+                                <th>Image</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pokemon of localPokemonList; let i = index">
+                                <td>{{ pokemon.id }}</td>
+                                <td>{{ pokemon.name }}</td>
+                                <td>
+                                    <img [src]="pokemon.image" alt="{{ pokemon.name }}" width="50" />
+                                </td>
+                                <td>
+                                    <button type="button" class="boton boton-editar" data-toggle="modal"
+                                        data-target="#editPokemonModal" (click)="openEditModal(i)">
+                                        <i class="bi bi-pencil"></i>
+                                        <span>Edit</span>
+                                    </button>
+
+                                    <button type="button" class="boton boton-eliminar"
+                                        (click)="confirmDeletePokemon(i)">
+                                        <i class="bi bi-trash"></i>
+                                        <span>Delete</span>
+                                    </button>
+
+                                    <button type="button" class="boton boton-ver" data-toggle="modal"
+                                        data-target="#viewMoreModal" (click)="openViewMoreModal(i)">
+                                        <i class="bi bi-info-circle"></i>
+                                        <span>View More</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <span>{{ showingMessage }}</span>
+
+                    <div class="pagination-buttons">
+                        <button (click)="goToFirstPage()" [disabled]="currentPage === 1" class="boton boton-paginacion">
+                            First
+                        </button>
+                        <button (click)="previousPage()" [disabled]="currentPage === 1" class="boton boton-paginacion">
+                            Previous
+                        </button>
+
+                        <span class="page-indicator">Page {{ currentPage }} of {{ totalPages }}</span>
+
+                        <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+                            class="boton boton-paginacion">
+                            Next
+                        </button>
+                        <button (click)="goToLastPage()" [disabled]="currentPage === totalPages"
+                            class="boton boton-paginacion">
+                            Last
+                        </button>
+                    </div>
+                </div>
+
+            </ng-template>
+        </div>
+    </div>
+
+    <!-- Modal for edit Pokemon -->
+    <div class="modal fade" id="editPokemonModal" tabindex="-1" role="dialog" aria-labelledby="editPokemonModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPokemonModalLabel">Edit Pokémon</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="pokemonName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="pokemonName" [(ngModel)]="tempPokemon.name"
+                                name="name" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="savePokemonChanges()"
+                        data-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for View More -->
+    <div class="modal fade" id="viewMoreModal" tabindex="-1" role="dialog" aria-labelledby="viewMoreModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewMoreModalLabel">Pokémon Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="selectedPokemon">
+                        <h5>{{ selectedPokemon.name }}</h5>
+                        <img [src]="selectedPokemon.image" alt="{{ selectedPokemon.name }}" width="150" />
+                        <p><strong>ID:</strong> {{ selectedPokemon.id }}</p>
+                        <p><strong>Abilities:</strong> {{ selectedPokemon.abilities?.join(', ') }}</p>
+                        <p><strong>Type:</strong> {{ selectedPokemon.type }}</p>
+                        <p><strong>Height:</strong> {{ selectedPokemon.height }} m</p>
+                        <p><strong>Weight:</strong> {{ selectedPokemon.weight }} kg</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

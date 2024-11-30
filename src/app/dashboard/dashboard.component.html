@@ -1,0 +1,36 @@
+<div class="dashboard-container">
+    <div class="content">
+      <nav class="sidebar">
+        <header>
+          <div class="user-info">
+            <img [src]="currentUser?.avatar" alt="User Avatar" class="avatar" />
+            <div>
+              <span class="user-name">{{ currentUser.name }}</span>
+              <span class="user-role">{{ currentUser.role || 'Usuario' }}</span>
+            </div>
+          </div>
+        </header>
+  
+        <ul>
+          <li *ngFor="let item of menuItems">
+            <a [routerLink]="item.link">
+              <span class="material-icons">{{ item.icon }}</span> 
+              <span>{{ item.name }}</span>
+            </a>
+          </li>
+  
+          <li class="logout">
+            <a (click)="logout()">
+              <span class="material-icons">exit_to_app</span> 
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+  
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+  

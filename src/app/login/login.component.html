@@ -1,0 +1,26 @@
+<div class="login-container">
+    <mat-card class="login-card">
+        <h2>Iniciar sesión</h2>
+        <form (ngSubmit)="onSubmit()">
+            <mat-form-field class="full-width mb-2">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput placeholder="pat@example.com" [formControl]="email" (blur)="updateErrorMessage()"
+                    required />
+                <mat-error *ngIf="email.invalid">{{ errorMessage() }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width mb-2">
+                <mat-label>Contraseña</mat-label>
+                <input matInput [type]="hide() ? 'password' : 'text'" [(ngModel)]="password" name="password" required />
+                <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility($event)"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
+                    <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+
+            </mat-form-field>
+
+            <button mat-flat-button type="submit" color="primary" class="full-width">Iniciar sesión</button>
+        </form>
+        <p *ngIf="error" class="error">{{ error }}</p>
+    </mat-card>
+</div>

@@ -1,0 +1,163 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 250px;
+  background: linear-gradient(135deg, #1B8AF1, #B58DED);
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Asegura que el contenido se distribuya, el logout se queda abajo */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Hace que los enlaces ocupen el espacio restante */
+}
+
+.sidebar span {
+  margin-left: 25px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  display: block;
+  padding: 10px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.sidebar a:hover {
+  background-color: #4545db; 
+  color: #fffbf0; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.2); 
+  border-radius: 8px;
+  margin: 15px;
+}
+
+.user-info .user-name {
+  display: block;
+  font-weight: bold;
+  color: #fff;
+}
+
+.user-info .user-role {
+  display: block; 
+  font-size: 14px;
+  font-weight: 400;
+  color: #e0e0e0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px solid #fff; 
+}
+
+main {
+  flex: 1;
+  padding: 30px;
+  border-radius: 12px;
+  margin-left: 30px;
+  overflow-y: auto;
+}
+
+.sidebar header .image-text {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos para el logout */
+.sidebar .logout {
+  margin-top: auto; /* Esto empuja el logout hacia abajo */
+}
+
+.sidebar .logout a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sidebar .logout a .material-icons {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.sidebar .logout a:hover {
+  background-color: #3737b8;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.sidebar .material-icons {
+  margin-right: 10px; /* Espacio entre el icono y el texto */
+  font-size: 22px; /* Tamaño de los iconos */
+}
+
+.sidebar a:hover {
+  background-color: #4545db;
+  color: #fffbf0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .logout a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sidebar .logout a .material-icons {
+  font-size: 24px; /* Ajustar tamaño del icono de logout */
+  margin-right: 10px;
+}
+
+.sidebar .logout a:hover {
+  background-color: #3737b8;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

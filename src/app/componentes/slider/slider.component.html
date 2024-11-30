@@ -1,0 +1,12 @@
+<p>COMPONENTE slider</p><br>
+<mat-slider>
+    <input matSliderThumb>
+</mat-slider>
+<mat-slider min="200" max="500">
+    <input value="300" matSliderStartThumb>
+    <input value="400" matSliderEndThumb>
+</mat-slider>
+<mat-slider min="0" max="100000" step="1000" showTickMarks discrete [displayWith]="formatLabel">
+    <input matSliderThumb>
+</mat-slider>
+<br><br>
