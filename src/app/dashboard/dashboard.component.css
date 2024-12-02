@@ -18,7 +18,7 @@
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Asegura que el contenido se distribuya, el logout se queda abajo */
+  justify-content: space-between;
 }
 
 .sidebar ul {
@@ -27,7 +27,7 @@
   margin-top: 3.5rem;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Hace que los enlaces ocupen el espacio restante */
+  flex-grow: 1; 
 }
 
 .sidebar span {
@@ -55,7 +55,6 @@
   display: flex;
   align-items: center;
   padding: 15px;
-  background-color: rgba(255, 255, 255, 0.2); 
   border-radius: 8px;
   margin: 15px;
 }
@@ -94,9 +93,8 @@ main {
   align-items: center;
 }
 
-/* Estilos para el logout */
 .sidebar .logout {
-  margin-top: auto; /* Esto empuja el logout hacia abajo */
+  margin-top: auto; 
 }
 
 .sidebar .logout a {
@@ -132,8 +130,8 @@ main {
 }
 
 .sidebar .material-icons {
-  margin-right: 10px; /* Espacio entre el icono y el texto */
-  font-size: 22px; /* Tamaño de los iconos */
+  margin-right: 10px;
+  font-size: 22px; 
 }
 
 .sidebar a:hover {
@@ -152,7 +150,7 @@ main {
 }
 
 .sidebar .logout a .material-icons {
-  font-size: 24px; /* Ajustar tamaño del icono de logout */
+  font-size: 24px; 
   margin-right: 10px;
 }
 
@@ -160,4 +158,83 @@ main {
   background-color: #3737b8;
   color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 35px;
+  background: linear-gradient(135deg, #1B8AF1, #B58DED);
+  color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+  height: 70px; 
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  font-size: 36px;
+  margin-right: 10px;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px solid white;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.user-role {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn:hover {
+  color: #fffbf0;
+}
+
+.material-icons {
+  font-size: 24px;
 }
